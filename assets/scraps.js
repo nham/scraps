@@ -151,11 +151,11 @@ $(function(){
     },
 
     createNew: function() {
-      $('#create-scrap > div').addClass("editing");
+      $('#create-scrap').addClass("editing");
     },
 
     cancelNew: function() {
-      $('#create-scrap > div').removeClass("editing");
+      $('#create-scrap').removeClass("editing");
     }
 
   });

@@ -104,13 +104,13 @@ textarea {
   
 #scrap-list .editing .display,
 #scrap-list .edit,
-#create-scrap .editing .display,
+#create-scrap.editing .display,
 #create-scrap .edit {
   display: none;
 }
 
 #scrap-list .editing .edit,
-#create-scrap .editing .edit {
+#create-scrap.editing .edit {
   display: block;
 }
 
