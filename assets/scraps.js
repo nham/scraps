@@ -163,9 +163,14 @@ $(function(){
     instantSearch: function(event) {
       var searchstr = this.search_input.val();
       if(searchstr.length > 1) {
-	  //        alert(searchstr);
-        Scraps.each(function(scrap) { 
-          alert(scrap.get('body')) 
+        $("#scrap-list").children().each(function() {
+          var scrap_el = $(this);
+
+          if(_.indexOf(scrap_el.text(), searchstr) === -1) {
+            scrap_el.hide();
+	  } else {
+            scrap_el.show();
+          }
         });
       }
     }
