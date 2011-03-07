@@ -168,6 +168,9 @@ $(function(){
           console.log('search string: '+searchstr);
           console.log('element text: '+scrap_el.text());
 
+          console.log(_.indexOf("chahadabbe", "had"));
+          console.log(_.indexOf("chahadabbe", "ha"));
+
           if(_.indexOf(scrap_el.text(), searchstr) === -1) {
             console.log('we hidin\n');
             scrap_el.hide();
