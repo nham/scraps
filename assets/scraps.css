@@ -1,0 +1,180 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+
+body {
+  font-family: "Helvetica Neue", Helvetica,  Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4em;
+  background: #eeeeee;
+  color: #000000;
+}
+
+a {
+  color: #4f7bc6;
+}
+
+#scrapapp {
+  min-width: 600px;
+  width: 70%;
+  margin: 0 auto 40px;
+  background: white;
+  padding: 20px;
+}
+
+#scrapapp > h1 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px 0 20px 0;
+  line-height: 1;
+}
+
+textarea {
+  width: 100%;
+  height: 250px;
+  margin-left: -1px;
+  padding: 0;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.4em;
+  outline: none;
+  display: block;
+  overflow: auto;
+}
+
+#create-scrap {
+  margin-bottom: 50px;
+}
+
+#create-scrap, #scrap-list { 
+  width: 100%;
+  margin-top: 10px;
+}
+
+#create-scrap span {
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #4f7bc6;
+}
+
+#create-scrap span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#new-scrap-buttons {
+  width: 190px;
+  margin: 5px auto;
+}
+
+#create-scrap input[type=button] {
+  padding: 5px;
+  width: 90px;
+  font-size: 14px;
+  display: inline;
+} 
+
+#scrap-list > li {
+  list-style-type: none;
+  position: relative;
+  border-bottom: 1px solid #cccccc;
+}
+
+#scrap-list li.editing {
+  padding: 0;
+  border-bottom: 0;
+}
+  
+#scrap-list .editing .display,
+#scrap-list .edit,
+#create-scrap .editing .display,
+#create-scrap .edit {
+  display: none;
+}
+
+#scrap-list .editing .edit,
+#create-scrap .editing .edit {
+  display: block;
+}
+
+.scrap-header {
+  font-size: 13px;
+  margin: 10px 0;
+}
+
+.scrap-date {
+  width: 130px;
+  color: #7f7f7f;
+  font-style: italic;
+}
+
+.scrap-destroy {
+  display: block;
+  float: right;
+  width: 20px;
+  height: 20px;
+  background: url(destroy.png) no-repeat 0 0;
+  cursor: pointer;
+}
+
+.scrap-destroy:hover {
+  background-position: 0 -20px;
+}
+
+/* Scrap content formatting (for Markdown) */
+.scrap-body {
+  clear: left;
+  font-size: 16px;
+  line-height: 1.4em;
+}
+
+.scrap-body h1,
+.scrap-body h2,
+.scrap-body h3,
+.scrap-body h4,
+.scrap-body h5,
+.scrap-body h6,
+.scrap-body p,
+.scrap-body ul,
+.scrap-body ol {
+  margin-bottom: 20px;
+}
+
+.scrap-body h1 {font-size: 26px;}
+.scrap-body h2 {font-size: 22px;}
+.scrap-body h3 {font-size: 18px;}
+.scrap-body h4 {font-size: 16px;}
+.scrap-body h5 {font-size: 14px;}
+.scrap-body h6 {font-size: 12px;}
+
+.scrap-body ul, .scrap-body ol {padding-left: 30px;}
+
+.scrap-body ul {list-style-type: disc;}
+.scrap-body ol {list-style-type: decimal;}
+
+.scrap-body blockquote {
+  margin-left: 10px;
+  padding-left: 5px;
+  border-left: 3px solid #4f7bc6;
+}
+
+.scrap-body pre {
+  margin-bottom: 20px;
+}
