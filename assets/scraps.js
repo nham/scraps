@@ -165,17 +165,9 @@ $(function(){
       if(searchstr.length > 1) {
         $("#scrap-list").children().each(function() {
           var scrap_el = $(this);
-          console.log('search string: '+searchstr);
-          console.log('element text: '+scrap_el.text());
-
-          console.log(_.indexOf("chahadabbe", "had"));
-          console.log(_.indexOf("chahadabbe", "ha"));
-
-          if(_.indexOf(scrap_el.text(), searchstr) === -1) {
-            console.log('we hidin\n');
+          if(scrap_el.text().indexOf(searchstr) === -1) {
             scrap_el.hide();
 	  } else {
-            console.log('we showin\n');
             scrap_el.show();
           }
         });
