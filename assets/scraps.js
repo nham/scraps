@@ -109,7 +109,8 @@ $(function(){
     events: {
       "click #create-new":  "createNew",
       "click #cancel-new": "cancelNew",
-      "click #save-new":  "saveNew"
+      "click #save-new":  "saveNew",
+      "keyup #search-box": "instantSearch",
     },
 
 
@@ -117,6 +118,7 @@ $(function(){
       _.bindAll(this, 'addOne', 'addAll', 'render');
 
       this.input = $("#new-scrap");
+      this.search_input = $("#search-box");
 
       Scraps.bind('add',     this.addOne);
       Scraps.bind('refresh', this.addAll);
@@ -156,6 +158,29 @@ $(function(){
 
     cancelNew: function() {
       $('#create-scrap').removeClass("editing");
+    },
+
+    instantSearch: function(event) {
+      var searchstr = this.search_input.val();
+      var search_func;
+
+      if(searchstr.length > 1) {
+        search_func = function() {
+          var scrap_el = $(this);
+  
+          if(scrap_el.text().indexOf(searchstr) === -1) {
+            scrap_el.hide();
+	  } else {
+            scrap_el.show();
+	  }
+	}
+      } else {
+        search_func = function() {
+          $(this).show();
+        }
+      }
+
+      $("#scrap-list").children().each(search_func);
     }
 
   });
