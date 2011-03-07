@@ -162,16 +162,25 @@ $(function(){
 
     instantSearch: function(event) {
       var searchstr = this.search_input.val();
+      var search_func;
+
       if(searchstr.length > 1) {
-        $("#scrap-list").children().each(function() {
+        search_func = function() {
           var scrap_el = $(this);
+  
           if(scrap_el.text().indexOf(searchstr) === -1) {
             scrap_el.hide();
 	  } else {
             scrap_el.show();
-          }
-        });
+	  }
+	}
+      } else {
+        search_func = function() {
+          $(this).show();
+        }
       }
+
+      $("#scrap-list").children().each(search_func);
     }
 
   });
