@@ -19,7 +19,7 @@ class Password {
     if($res === false)
       throw new Exception('Couldn't select password from database');
     else
-      $this->pw = $db->fetchArray()['pw'];
+      $this->pw = $res;
 
     $this->hasher = new PasswordHash(8, false);
   }
