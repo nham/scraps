@@ -57,7 +57,7 @@ if($_POST['newpass']) {
     $confirm_failed = $_POST['newpass'] != $_POST['passconfirm'];
 
     // (Try to) set the password
-    if($confirm_match) {
+    if(!$confirm_failed) {
       try {
         $set_pass = $P->setPassword($_POST['newpass'], $db);
       } catch(Exception $e) {
