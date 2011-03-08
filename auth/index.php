@@ -17,7 +17,7 @@ class Password {
     $res = $db->querySingle('SELECT pw FROM password');
     
     if($res === false)
-      throw new Exception('Couldn't select password from database');
+      throw new Exception("Couldn't select password from database");
     else
       $this->pw = $res;
 
@@ -34,7 +34,7 @@ class Password {
 
   function setPassword($new, $db) {
     $hashed_pw = $this->hasher->HashPassword($new);
-    if(!$db->exec("UPDATE password SET pw='$hashed_pw'")
+    if(!$db->exec("UPDATE password SET pw='$hashed_pw'"))
       throw new Exception("Couldn't set the password in the database.");
     else
       return true;
