@@ -161,14 +161,14 @@ $(function(){
     },
 
     instantSearch: function(event) {
-      var searchstr = this.search_input.val();
+      var searchstr = this.search_input.val().toLowerCase();
       var search_func;
 
       if(searchstr.length > 1) {
         search_func = function() {
           var scrap_el = $(this);
   
-          if(scrap_el.text().indexOf(searchstr) === -1) {
+          if(scrap_el.text().toLowerCase().indexOf(searchstr) === -1) {
             scrap_el.hide();
 	  } else {
             scrap_el.show();
