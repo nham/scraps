@@ -14,13 +14,12 @@ class Password {
   var $hasher;
 
   function __construct($db) {
-    $res = $db->query('SELECT pw FROM password');
+    $res = $db->querySingle('SELECT pw FROM password');
     
-    if($res) {
-      $this->pw = $db->fetchArray()['pw'];
-    } else {
+    if($res === false)
       throw new Exception('Couldn't select password from database');
-    }
+    else
+      $this->pw = $db->fetchArray()['pw'];
 
     $this->hasher = new PasswordHash(8, false);
   }
@@ -55,7 +54,7 @@ if($_POST['newpass']) {
   if($pass_exists && !$P->isValid($_POST['password'])) {
     $pass_incorrect = true;
   } else {
-    $confirm_match = $_POST['newpass'] == $_POST['passconfirm'];
+    $confirm_failed = $_POST['newpass'] != $_POST['passconfirm'];
 
     // (Try to) set the password
     if($confirm_match) {
@@ -82,7 +81,7 @@ if($_POST['newpass']) {
 
 <?php else: ?>
 
-  <?php if(!$confirm_match): ?>
+  <?php if($confirm_failed): ?>
   <p>The passwords you entered don't match.</p>
   <?php endif; ?>
 
