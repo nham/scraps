@@ -1,6 +1,6 @@
 <?php
 
-$db = new SQLite3('db/scraps.db');
+$db = new SQLite3('scraps.db');
 
 $db->exec('CREATE TABLE scraps (id integer PRIMARY KEY, created integer, body text)');
 
