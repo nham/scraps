@@ -3,7 +3,7 @@
 // $path_to_scraps = '/path/to/scraps'
 $path_to_scraps = '/scraps';
 
-$db = new SQLite3('db/scraps.db');
+$db = new SQLite3('../db/scraps.db');
 $id = (int) str_replace($path_to_scraps."/scrapyard/", "", $_SERVER['REQUEST_URI']);
 
 switch($_SERVER['REQUEST_METHOD']) {
