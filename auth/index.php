@@ -33,7 +33,8 @@ class Password {
   }
 
   function setPassword($new, $db) {
-    if(!$db->exec("UPDATE password SET pw=$new")
+    $hashed_pw = $this->hasher->HashPassword($new);
+    if(!$db->exec("UPDATE password SET pw='$hashed_pw'")
       throw new Exception("Couldn't set the password in the database.");
     else
       return true;
