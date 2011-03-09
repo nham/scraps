@@ -185,6 +185,28 @@ $(function(){
 
   });
 
-  window.App = new AppView;
+  var validationResponse = function(data) {
+    // Only display the notes  if the user is correctly logged in
+    if(data === "true") {
+      $('#scrapapp').addClass('auth');
+      window.App = new AppView;
+    } else {
+      $('#login-msg').addClass('no-auth');
+    }
+  }
+
+  if(document.cookie.indexOf("auth") !== -1) {
+    var authnum = document.cookie.split('=')[1];
+    var params = {
+      url: 'auth/',
+      type: 'GET',
+      data: null,
+      success: validationResponse
+    }
+
+    $.ajax(params);
+  } else {
+    $('#login-msg').addClass('no-auth');
+  }
 
 });

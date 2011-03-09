@@ -28,7 +28,13 @@ a {
   color: #4f7bc6;
 }
 
+
+#login-msg {
+  display: none;
+}
+
 #scrapapp {
+  display: none; // hide initially until authenticated
   min-width: 600px;
   width: 70%;
   margin: 0 auto 40px;
@@ -188,4 +194,15 @@ textarea {
 
 .scrap-body pre {
   margin-bottom: 20px;
+}
+
+
+/* Somewhat hacky display for login */
+
+#scrapapp.auth {
+  display: block;
+}
+
+#login-msg.no-auth {
+  display: block;
 }

@@ -6,6 +6,7 @@ function db_connect() {
   return new SQLite3('../db/scraps.db');
 }
 
+
 class Password {
   var $pw;
   var $hasher;
@@ -40,7 +41,8 @@ class Password {
   }
 }
 
-class Auth {
+
+class Auth extends Exception {
   var $db;
   var $anums;
 
@@ -49,12 +51,19 @@ class Auth {
 
     $this->anums = array();
     $res = $this->db->query('SELECT anum FROM auth_nums');
-    while($row = $res->fetchArray())
-      array_push($this->anums, $row['anum']);
+
+    if($res === false)
+      throw new Exception("Couldn't get authentication numbers from database.");
+    else
+      while($row = $res->fetchArray())
+        array_push($this->anums, $row['anum']);
   }
 
   function create($num) {
-    $this->db->exec("INSERT INTO auth_nums VALUES ('$num')");
+    if(!$this->db->exec("INSERT INTO auth_nums VALUES ('$num')"))
+      throw new Exception("Couldn't add authentication number to the database.");
+    else
+      return true;
   }
 
   function isValid($num) {
@@ -125,12 +134,20 @@ function setpw() {
     <input type="submit" value="Set Password" />
     </form>
 
+    </body>
+    </html>
+
   <?php endif;
 }
 
 
 function login() {
-  $A = new Auth();
+  try {
+    $A = new Auth();
+  } catch(Exception $e) {
+    die($e->getMessage());
+  }
+
 
   if($_POST['password']) {
     $P = new Password();
@@ -147,7 +164,12 @@ function login() {
       $cookieval = $rand1.$rand2;
 
       setcookie("auth", $cookieval, time()+3600*24*365, '/scraps/');
-      $A->create($cookieval);
+ 
+      try {
+        $A->create($cookieval);
+      } catch(Exception $e) {
+        die($e->getMessage());
+      }
     }
   } else {
     if(isset($_COOKIE['auth']) && $A->isValid($_COOKIE['auth']))
@@ -179,16 +201,37 @@ function login() {
     <input type="submit" value="Login" />
     </form>
 
+    </body>
+    </html>
+
   <?php endif;
 }
 
 
-if(isset($_GET['a']))
+function validate() {
+  if(!isset($_COOKIE['auth'])) {
+    echo "false";
+  } else {
+    try {
+      $A = new Auth();
+    } catch(Exception $e) {
+      die($e->getMessage());
+    }
+ 
+    if($A->isValid($_COOKIE['auth']))
+      echo "true";
+    else
+      echo "false";
+  }
+}
+
+
+if(isset($_GET['a'])) {
   switch($_GET['a']) {
     case "setpw": setpw(); break;
     case "login": login(); break;
   }
+} else {
+  validate();
+}
 ?>
-
-</body>
-</html>
