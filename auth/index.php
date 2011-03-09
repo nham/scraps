@@ -6,6 +6,18 @@ function db_connect() {
   return new SQLite3('../db/scraps.db');
 }
 
+function set_auth_cookie() {
+  setcookie("auth", "", time() - 3600);
+
+  $randmax = pow(2, 31) - 1;
+  $rand1 = base_convert(mt_rand(0, $randmax), 10, 36);
+  $rand2 = base_convert(mt_rand(0, $randmax), 10, 36);
+  $cookieval = $rand1.$rand2;
+
+  setcookie("auth", $cookieval, time()+3600*24*365, '/scraps/');
+  return $cookieval;
+}
+
 
 class Password {
   var $pw;
@@ -157,14 +169,8 @@ function login() {
     } else {
       $set_cookie = true;
 
-      setcookie("auth", "", time() - 3600);
+      $cookieval = set_auth_cookie();
 
-      $rand1 = base_convert(mt_rand(), 10, 36);
-      $rand2 = base_convert(mt_rand(), 10, 36);
-      $cookieval = $rand1.$rand2;
-
-      setcookie("auth", $cookieval, time()+3600*24*365, '/scraps/');
- 
       try {
         $A->create($cookieval);
       } catch(Exception $e) {
