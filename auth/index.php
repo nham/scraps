@@ -129,20 +129,16 @@ function login() {
 
 
 function validate() {
-  if(!isset($_COOKIE['auth'])) {
-    echo "false";
-  } else {
-    try {
-      $A = new Auth();
-    } catch(Exception $e) {
-      die($e->getMessage());
-    }
- 
-    if($A->isValid($_COOKIE['auth']))
-      echo "true";
-    else
-      echo "false";
+  try {
+    $A = new Auth();
+  } catch(Exception $e) {
+    die($e->getMessage());
   }
+ 
+  if($A->isValid($_COOKIE['auth']))
+    echo "true";
+  else
+    echo "false";
 }
 
 

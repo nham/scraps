@@ -62,9 +62,13 @@ class Auth extends Exception {
   }
 
   function isValid($num) {
-    foreach($this->anums as $anum)
-      if($anum == $num)
-        return true;
+    // We want to be able to just pass in the cookie variable even though it might
+    // not be set
+    if(isset($num)) {
+      foreach($this->anums as $anum)
+        if($anum == $num)
+          return true;
+    }
 
     return false;
   }

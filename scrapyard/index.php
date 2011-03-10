@@ -6,7 +6,7 @@ require "../lib/lib.php";
 // $path_to_scraps = '/path/to/scraps'
 $path_to_scraps = '/scraps';
 
-$db = new SQLite3('../db/scraps.db');
+$db = db_connect();
 $id = (int) str_replace($path_to_scraps."/scrapyard/", "", $_SERVER['REQUEST_URI']);
 
 
@@ -57,20 +57,32 @@ function delete_scrap($id) {
 }
 
 
-// Handle the request
-switch($_SERVER['REQUEST_METHOD']) {
-  case "GET":
-    echo (empty($id)) ? serve_all_scraps() : serve_scrap($id);
-    break;
+try {
+  $A = new Auth();
+} catch(Exception $e) {
+  die($e->getMessage());
+}
 
-  case "POST":
-    $scrap = json_decode(stripslashes($_POST['model']), true);
+// Check auth before handling the request
+if(!$A->isValid($_COOKIE['auth'])) {
+  echo "invalid-auth";
+} else {
 
-    // PUT and DELETE are tunnelled over POST
-    if(!isset($_POST['_method']))
-      echo save_scrap($scrap);
-    else if($_POST['_method'] == "PUT")
-      modify_scrap($scrap, $id);
-    else if($_POST['_method'] == "DELETE")
-      delete_scrap($id);
+  // Handle the request
+  switch($_SERVER['REQUEST_METHOD']) {
+    case "GET":
+      echo (empty($id)) ? serve_all_scraps() : serve_scrap($id);
+      break;
+
+    case "POST":
+      $scrap = json_decode(stripslashes($_POST['model']), true);
+
+      // PUT and DELETE are tunnelled over POST
+      if(!isset($_POST['_method']))
+        echo save_scrap($scrap);
+      else if($_POST['_method'] == "PUT")
+        modify_scrap($scrap, $id);
+      else if($_POST['_method'] == "DELETE")
+        delete_scrap($id);
+  }
 }
