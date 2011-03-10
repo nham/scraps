@@ -1,4 +1,7 @@
 <?php
+
+require "../lib/lib.php";
+
 // if scraps is located at http://example.com/path/to/scraps/, then
 // $path_to_scraps = '/path/to/scraps'
 $path_to_scraps = '/scraps';
