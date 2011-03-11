@@ -194,6 +194,7 @@ textarea {
 
 .scrap-body pre {
   margin-bottom: 20px;
+  overflow: auto;
 }
 
 
