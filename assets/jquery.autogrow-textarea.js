@@ -1,3 +1,4 @@
+// Taken from http://javascriptly.com/examples/jquery-grab-bag/js/jquery.autogrow-textarea.js
 (function($) {
 
     /*
@@ -15,7 +16,7 @@
                 position:   'absolute',
                 top:        -10000,
                 left:       -10000,
-                width:      $(this).width(),
+                width:      $this.css('width'),
                 fontSize:   $this.css('fontSize'),
                 fontFamily: $this.css('fontFamily'),
                 lineHeight: $this.css('lineHeight'),
