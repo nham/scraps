@@ -120,6 +120,8 @@ $(function(){
       this.input = $("#new-scrap");
       this.search_input = $("#search-box");
 
+      $('textarea').autogrow();
+
       Scraps.bind('add',     this.addOne);
       Scraps.bind('refresh', this.addAll);
       Scraps.bind('all',     this.render);
